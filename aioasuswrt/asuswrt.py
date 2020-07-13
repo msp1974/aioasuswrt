@@ -204,6 +204,7 @@ GET_LIST = {
         "webs_state_upgrade",
         "webs_state_url",
     ],
+    "SUPPORTED": {"rc_support"},
 }
 
 Device = namedtuple("Device", ["mac", "ip", "name"])
@@ -457,8 +458,8 @@ class AsusWrt:
 
     async def async_get_supported_functions(self):
         """Gets comma seperated list of router supported functions"""
-        supported = await self.async_get_nvram("SUPPORT")
-        return supported.get("rc_support").split()
+        supported = await self.async_get_nvram("SUPPORTED")
+        return supported.get("rc_support", "").split()
 
     @property
     def is_connected(self):
